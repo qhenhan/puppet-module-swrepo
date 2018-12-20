@@ -119,6 +119,10 @@ define swrepo::repo (
     }
   }
 
+  file { "${swrepo::config_dir_name_real}/${name}.repo":
+    require => File[$swrepo::config_dir_name_real],
+  }
+
   if $gpgkey_keyid != undef and $gpgkey_source == undef {
       fail('swrepo::repo::gpgkey_keyid is specified but swrepo::repo::gpgkey_source is missing.')
   }
